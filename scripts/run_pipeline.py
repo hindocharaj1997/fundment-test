@@ -15,12 +15,7 @@ DQ_FILE = "sql/dq/data_quality_checks.sql"
 
 def load_sql(file_path: str) -> str:
     """
-    Docstring for load_sql
-    
-    :param file_path: Description
-    :type file_path: str
-    :return: Description
-    :rtype: str
+    Loads a SQL file and replaces the {{ project_id }} placeholder with the actual project ID.
     """
     with open(file_path, "r") as f:
         sql = f.read()
@@ -29,12 +24,7 @@ def load_sql(file_path: str) -> str:
 
 def run_query(client: bigquery.Client, sql: str):
     """
-    Docstring for run_query
-    
-    :param client: Description
-    :type client: bigquery.Client
-    :param sql: Description
-    :type sql: str
+    Runs a SQL query using the provided BigQuery client.
     """
     job = client.query(sql)
     job.result()
@@ -42,10 +32,7 @@ def run_query(client: bigquery.Client, sql: str):
 
 def run_dq_checks(client: bigquery.Client):
     """
-    Docstring for run_dq_checks
-    
-    :param client: Description
-    :type client: bigquery.Client
+    Runs data quality checks using the provided BigQuery client.
     """
 
     print("Running data quality checks...")
@@ -91,4 +78,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        print(f"Error running pipeline: {e}")
+        raise
