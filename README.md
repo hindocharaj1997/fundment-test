@@ -108,7 +108,7 @@ This solution establishes a very good foundation. The following enhancements can
 
 <img width="1115" height="919" alt="image" src="./Future_State_Architecture.png" />
 
-⸻
+
 Quick Start
 
 Prerequisites: GCP account, Terraform, bq CLI, Python 3.9+
@@ -170,9 +170,9 @@ select cohort_month,
        sum(ltv_6m) as total_cohort_ltv,
        avg(ltv_6m) as avg_client_ltv
   from `{{ project_id }}.gold.client_ltv`
- where cohort_year = 2026
+ where cohort_year = 2025
    and cohort_month IN (1, 2)
- grouo by cohort_month
+ group by cohort_month
  order by cohort_month;
 ```
 
