@@ -1,3 +1,8 @@
+/*
+Load client LTV (Lifetime Value) metrics into BigQuery gold table
+Calculates LTV at 1 month, 3 months, and 6 months intervals
+*/
+
 create or replace table `{{ project_id }}.gold.client_ltv` as
 select client_id,
        extract(month from first_fee_date) as cohort_month,

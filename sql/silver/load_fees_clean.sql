@@ -1,3 +1,11 @@
+/*
+Load cleaned fees data into BigQuery silver table
+Columns enriched:
+- client_nino_hash: hashed version of client_nino for privacy
+- first_fee_date: date of the client's first fee
+- month_number: number of months since the client's first fee
+*/
+
 create or replace table `{{ project_id }}.silver.fees_clean` as
 
 with dedup as (

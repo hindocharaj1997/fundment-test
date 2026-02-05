@@ -14,17 +14,40 @@ DQ_FILE = "sql/dq/data_quality_checks.sql"
 
 
 def load_sql(file_path: str) -> str:
+    """
+    Docstring for load_sql
+    
+    :param file_path: Description
+    :type file_path: str
+    :return: Description
+    :rtype: str
+    """
     with open(file_path, "r") as f:
         sql = f.read()
     return sql.replace("{{ project_id }}", PROJECT_ID)
 
 
 def run_query(client: bigquery.Client, sql: str):
+    """
+    Docstring for run_query
+    
+    :param client: Description
+    :type client: bigquery.Client
+    :param sql: Description
+    :type sql: str
+    """
     job = client.query(sql)
     job.result()
 
 
 def run_dq_checks(client: bigquery.Client):
+    """
+    Docstring for run_dq_checks
+    
+    :param client: Description
+    :type client: bigquery.Client
+    """
+
     print("Running data quality checks...")
     sql = load_sql(DQ_FILE)
 

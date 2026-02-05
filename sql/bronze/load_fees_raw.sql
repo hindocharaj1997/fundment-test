@@ -1,3 +1,7 @@
+/*
+* Load raw fees data from CSV file in GCS into BigQuery bronze table
+*/
+
 load data overwrite `{{ project_id }}.bronze.fees_raw`
 from files (
   skip_leading_rows = 1,

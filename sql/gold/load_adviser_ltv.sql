@@ -1,3 +1,7 @@
+/*
+Load adviser LTV (Lifetime Value) over first 6 months into BigQuery gold table
+*/
+
 create or replace table `{{ project_id }}.gold.adviser_ltv` as
 select adviser_id,
        sum(fee_amount) as total_6m_ltv
