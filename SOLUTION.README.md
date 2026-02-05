@@ -106,7 +106,29 @@ This solution establishes a very good foundation. The following enhancements can
 
 **Future State Architecture:**
 
-<img width="1115" height="919" alt="image" src="https://github.com/user-attachments/assets/25c34cf1-dcdd-4b5a-935c-de7414adaf7d" />
+<img width="1115" height="919" alt="image" src="./Future_State_Architecture.png" />
+
+⸻
+Quick Start
+
+Prerequisites: GCP account, Terraform, bq CLI, Python 3.9+
+
+1. Set up infrastructure:
+```bash
+cd terraform/
+gcloud auth application-default login --impersonate-service-account=<service_account>@<project_id>.iam.gserviceaccount.com
+terraform init
+terraform plan
+terraform apply
+```
+
+2. Run the pipeline:
+```bash
+python3 scripts/run_pipeline.py
+```
+
+See [SOLUTION.md]([url](https://github.com/hindocharaj1997/fundment-test/blob/main/SOLUTION.md)) for architecture, data model, assumptions, and production roadmap.
+
 
 
 ---
