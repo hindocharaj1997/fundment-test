@@ -92,27 +92,6 @@ sql/                     # SQL models and/or queries
 scripts/ (optional)      # Any helper scripts you use
 
 ⸻
-Quick Start
-
-Prerequisites: GCP account, Terraform, bq CLI, Python 3.9+
-
-1. Set up infrastructure:
-```bash
-cd terraform/
-gcloud auth application-default login --impersonate-service-account=<service_account>@<project_id>.iam.gserviceaccount.com
-terraform init
-terraform plan
-terraform apply
-```
-
-2. Run the pipeline:
-```bash
-python3 scripts/run_pipeline.py
-```
-
-See [SOLUTION.md]([url](https://github.com/hindocharaj1997/fundment-test/blob/main/SOLUTION.md)) for architecture, data model, assumptions, and production roadmap.
-
-⸻
 README Expectations
 Please update this README to include:
 	•	A short description of your architecture
