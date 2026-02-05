@@ -178,7 +178,7 @@ select cohort_month,
  order by cohort_month;
 ```
 
-Compares cohort sizes and lifetime value metrics between January and February 2026 cohorts.
+Compares cohort sizes and lifetime value metrics between January and February 2025 cohorts.
 
 ---
 
