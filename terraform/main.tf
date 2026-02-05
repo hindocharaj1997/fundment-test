@@ -30,8 +30,8 @@ resource "google_bigquery_dataset" "gold_dataset" {
 
 resource "google_bigquery_table" "fees_raw" {
 
-  dataset_id = google_bigquery_dataset.bronze_dataset.dataset_id
-  table_id   = "fees_raw"
+  dataset_id           = google_bigquery_dataset.bronze_dataset.dataset_id
+  table_id             = "fees_raw"
 
   schema = jsonencode([
     { name = "client_id", type = "STRING", mode = "REQUIRED" },
@@ -46,8 +46,9 @@ resource "google_bigquery_table" "fees_raw" {
 
 resource "google_bigquery_table" "fees_clean" {
 
-  dataset_id = google_bigquery_dataset.silver_dataset.dataset_id
-  table_id   = "fees_clean"
+  dataset_id           = google_bigquery_dataset.silver_dataset.dataset_id
+  table_id             = "fees_clean"
+  deletion_protection  = false
 
   schema = jsonencode([
     { name = "client_id", type = "STRING", mode = "REQUIRED" },
@@ -64,11 +65,14 @@ resource "google_bigquery_table" "fees_clean" {
 
 resource "google_bigquery_table" "client_ltv" {
 
-  dataset_id = google_bigquery_dataset.gold_dataset.dataset_id
-  table_id   = "client_ltv"
+  dataset_id           = google_bigquery_dataset.gold_dataset.dataset_id
+  table_id             = "client_ltv"
+  deletion_protection  = false
 
   schema = jsonencode([
     { name = "client_id", type = "STRING", mode = "REQUIRED" },
+    { name = "cohort_month", type = "INTEGER", mode = "REQUIRED" },
+    { name = "cohort_year", type = "INTEGER", mode = "REQUIRED" },
     { name = "ltv_1m", type = "NUMERIC", mode = "REQUIRED" },
     { name = "ltv_3m", type = "NUMERIC", mode = "REQUIRED" },
     { name = "ltv_6m", type = "NUMERIC", mode = "REQUIRED" }
@@ -77,8 +81,9 @@ resource "google_bigquery_table" "client_ltv" {
 
 resource "google_bigquery_table" "adviser_ltv" {
 
-  dataset_id = google_bigquery_dataset.gold_dataset.dataset_id
-  table_id   = "adviser_ltv"
+  dataset_id           = google_bigquery_dataset.gold_dataset.dataset_id
+  table_id             = "adviser_ltv"
+  deletion_protection  = false
 
   schema = jsonencode([
     { name = "adviser_id", type = "STRING", mode = "REQUIRED" },
