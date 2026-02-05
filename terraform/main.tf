@@ -52,7 +52,7 @@ resource "google_bigquery_table" "fees_clean" {
 
   schema = jsonencode([
     { name = "client_id", type = "STRING", mode = "REQUIRED" },
-    { name = "client_nino", type = "STRING", mode = "REQUIRED" },
+    { name = "client_nino_hash", type = "STRING", mode = "REQUIRED" },
     { name = "adviser_id", type = "STRING", mode = "REQUIRED" },
     { name = "fee_date", type = "DATE", mode = "REQUIRED" },
     { name = "fee_amount", type = "NUMERIC", mode = "REQUIRED" },
