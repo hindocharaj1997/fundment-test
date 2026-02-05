@@ -14,6 +14,7 @@ This is a production-minded batch analytics platform for fee analytics. The arch
 | **Adviser Attribution**: All advisers are credited for fees during their tenure | If a client switches the advisers, all the advisers' LTV reflects their period |
 | **Deduplication**: Exact row match only (all columns identical) | Catches accidental duplicates while preserving intentional corrections (same date, different amount is a separate adjustment) |
 | **Client Lifetime**: Anniversary-based months (DATE_DIFF on calendar months) | If first fee is May 15, month 2 starts June 15 (not June 1). Ideal to implement and reason about than rolling 30-day windows |
+| **UT**: Manual UT will be used| In production, we can implement via PyTest and integrate it with CI pipeline |
 
 ---
 
@@ -102,6 +103,7 @@ This solution establishes a very good foundation. The following enhancements can
 | **Reconciliation** | Manual spot-checks | Automated reconciliation queries (bronze sum vs. gold sum, duplicate detection reports) |
 | **Testing** | Manual validation | dbt + integration tests for data contracts, pipeline tests |
 | **Backfills** | Manual rerun of pipeline | Orchestrated backfills with load tracking & conflict resolution |
+| **Automated UT** | Manual UT | Implement via PyTest and integrated with CI pipeline |
 | **CI/CD** | None | Use of GitHub Actions |
 
 **Future State Architecture:**
