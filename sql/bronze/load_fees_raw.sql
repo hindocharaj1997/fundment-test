@@ -1,6 +1,6 @@
-load data overwrite `fundment-datalake.raw.fees_raw`
+load data overwrite `{{ project_id }}.bronze.fees_raw`
 from files (
-  skip = 1,
+  skip_leading_rows = 1,
   format = 'CSV',
   uris = ['gs://fundment-datalake/raw/synthetic_fees_1024_0925.csv']
 );

@@ -4,6 +4,7 @@ from google.cloud import bigquery
 PROJECT_ID = os.environ.get("PROJECT_ID", "pocs19")
 
 SQL_FILES = [
+    "sql/bronze/load_fees_raw.sql",
     "sql/silver/load_fees_clean.sql",
     "sql/gold/load_client_ltv.sql",
     "sql/gold/load_adviser_ltv.sql"
