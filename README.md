@@ -114,21 +114,27 @@ Quick Start
 Prerequisites: GCP account, Terraform, bq CLI, Python 3.9+
 
 1. Set up infrastructure:
+   
 ```bash
 cd terraform/
+
+# Impersonate as a service account having the resource creation/updation access
 gcloud auth application-default login --impersonate-service-account=<service_account>@<project_id>.iam.gserviceaccount.com
+
+# Initiate the terraform, check the plan and create the GCS bucket, BQ dataset and BQ tables.
 terraform init
 terraform plan
 terraform apply
 ```
 
 2. Run the pipeline:
+
 ```bash
+# Run the pipeline which will load bronze, silver and gold layer and perform data quality checks.
 python3 scripts/run_pipeline.py
 ```
 
-See [SOLUTION.md]([url](https://github.com/hindocharaj1997/fundment-test/blob/main/SOLUTION.md)) for architecture, data model, assumptions, and production roadmap.
-
+3. Execute below queries to answer business questions.
 
 
 ---
