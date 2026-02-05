@@ -105,13 +105,12 @@ This solution establishes a very good foundation. The following enhancements can
 | **Reconciliation** | Manual spot-checks | Automated reconciliation queries (bronze sum vs. gold sum, duplicate detection reports) |
 | **Testing** | Manual validation | dbt + integration tests for data contracts, pipeline tests |
 | **Backfills** | Manual rerun of pipeline | Orchestrated backfills with load tracking & conflict resolution |
+| **CI/CD** | None | Use of GitHub Actions |
 
-**Schema Evolution Strategy:**
-1. Input schema is enforced at bronze table layer (Terraform)
-2. If source adds new fields: Create new tables (e.g., fees_raw_v2) or add nullable columns to bronze
-3. If source removes fields: Deprecate columns (keep as NULL), maintain compatibility layer
-4. All schema changes require: documentation, versioning, and test cases
-5. Gold tables remain stable via view-based abstraction (decouples analytics from schema churn)
+**Future State Architecture:**
+
+<img width="1115" height="919" alt="image" src="https://github.com/user-attachments/assets/25c34cf1-dcdd-4b5a-935c-de7414adaf7d" />
+
 
 ---
 
@@ -131,7 +130,7 @@ FROM `{{ project_id }}.gold.client_ltv`
 ORDER BY ltv_6m DESC;
 ```
 
-**Output interpretation:** Each row represents one client with their fee accumulation milestones measured from their individual start date.
+Each row represents one client with their fee accumulation milestones measured from their individual start date.
 
 ---
 
@@ -152,7 +151,7 @@ GROUP BY cohort_month
 ORDER BY cohort_month;
 ```
 
-**Output interpretation:** Compares cohort sizes and lifetime value metrics between January and February 2026 cohorts.
+Compares cohort sizes and lifetime value metrics between January and February 2026 cohorts.
 
 ---
 
@@ -162,12 +161,9 @@ ORDER BY cohort_month;
 SELECT 
   adviser_id,
   total_6m_ltv,
-  ROW_NUMBER() OVER(ORDER BY total_6m_ltv DESC) as rank
 FROM `{{ project_id }}.gold.adviser_ltv`
 ORDER BY total_6m_ltv DESC
 LIMIT 1;
 ```
 
 **Attribution model:** Each adviser receives credit for all fees earned while managing the client (across all clients in their portfolio, first 6 months of each client's lifetime). If a client switches advisers, both advisers get proportional credit for their periods.
-
-**Output interpretation:** Top-performing adviser by total client value generated in first 6 months of engagement.
